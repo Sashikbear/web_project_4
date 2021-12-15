@@ -6,7 +6,5 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  width: 100vw;
-  height: 100vh;
   background: #000000;
 }
