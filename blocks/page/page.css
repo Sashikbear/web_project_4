@@ -9,6 +9,4 @@
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   background: #000000;
-  display: flex;
-  justify-content: center;
 }

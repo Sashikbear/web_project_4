@@ -1,0 +1,9 @@
+.button_edit {
+  margin: 5px 0 0 18px;
+  padding: 7px;
+  width: 24px;
+  height: 24px;
+  align-self: center;
+  border: 1px solid #ffffff;
+  box-sizing: border-box;
+}

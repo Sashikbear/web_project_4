@@ -1,0 +1,5 @@
+.profile__user {
+  display: flex;
+  justify-items: space-between;
+  width: 100%;
+}

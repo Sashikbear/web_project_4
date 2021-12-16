@@ -1,6 +1,4 @@
-.profile {
-  width: 100%;
+.profile__column {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 }
