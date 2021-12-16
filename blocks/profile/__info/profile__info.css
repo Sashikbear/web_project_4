@@ -4,3 +4,8 @@
   justify-content: center;
   max-width: 415px;
 }
+@media screen and (max-width: 1150px) {
+  .profile__info {
+    align-items: center;
+  }
+}
