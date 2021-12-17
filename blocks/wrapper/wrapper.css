@@ -3,7 +3,7 @@
   margin: 0 auto;
   padding: 45px 200px 65px 200px;
 }
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 767px) {
   .wrapper {
     width: calc(100% - 38px);
     margin: 0 19px;
