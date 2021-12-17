@@ -1,4 +1,4 @@
-.button_save {
+.button_type_save {
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
@@ -9,11 +9,11 @@
   width: 358px;
   height: 50.15px;
 }
-.button_save:hover {
+.button_type_save:hover {
   opacity: 0.8;
 }
 @media screen and (max-width: 767px) {
-  .button_save {
+  .button_type_save {
     width: 238px;
   }
 }

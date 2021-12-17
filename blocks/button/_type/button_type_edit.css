@@ -1,4 +1,4 @@
-.button_edit {
+.button_type_edit {
   margin: 5px 0 0 18px;
   padding: 7px;
   width: 24px;
@@ -7,7 +7,7 @@
   border: 1px solid #ffffff;
 }
 @media screen and (max-width: 1150px) {
-  .button_edit {
+  .button_type_edit {
     width: 18px;
     height: 18px;
     padding: 5.25px;

@@ -1,9 +1,0 @@
-.button_like {
-  align-self: center;
-}
-.button_like:hover {
-  opacity: 0.5;
-}
-.button_like:active {
-  fill: black;
-}

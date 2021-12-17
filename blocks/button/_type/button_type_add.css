@@ -1,4 +1,4 @@
-.button_add {
+.button_type_add {
   margin: 0 0 0 0;
   padding: 14px 64px;
   width: 150px;
@@ -8,7 +8,7 @@
   align-self: center;
 }
 @media screen and (min-width: 320px) and (max-width: 767px) {
-  .button_add {
+  .button_type_add {
     padding: 17px 133px;
     width: 282px;
   }
