@@ -26,7 +26,6 @@
 @import url(../blocks/button/_type/button_type_save.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/__card-grid/cards__card-grid.css);
-@import url(../blocks/cards/__card-item/cards__card-item.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__info/card__info.css);
 @import url(../blocks/card/__image/card__image.css);
