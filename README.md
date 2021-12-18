@@ -2,15 +2,35 @@
 
 ### Overview
 
-* Figma
-* Images
+- Description
+- CSS
+- JS
+- Link
 
-**Figma**
+**Description**
 
-* [Link to the project in Figma](https://www.figma.com/file/SurN1jaeEQIhuZEDMhmWWf/Sprint-4-Around-The-U.S.-desktop-mobile?node-id=0%3A1)
+This prject is built over several smaller sprints and is to display the use of CSS responsive design skills as well as javascript skills. The final result should be an interactive page where users can add, remove, or like photos.
 
-**Images**
+**CSS**
 
-The way you'll do this at work is by exporting images directly from Figma — we recommend doing that to practice more. Don't forget to optimize them [here](https://tinypng.com/), so your project loads faster. 
+The tools used for the project include:
 
-Have fun with JavaScript!
+- Flex
+- Grid
+- calc()
+- @media
+- font-face
+
+**JS**
+
+The tools used for the project include:
+
+- querySelector
+- setAttribute
+- classList.toggle
+- textContent
+- addEventListener
+
+**Link**
+
+Check out the project [here] (https://sashikbear.github.io/web_project_4/)
