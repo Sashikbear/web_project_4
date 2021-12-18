@@ -28,36 +28,32 @@
             <div class="profile__info">
               <div class="profile__user">
                 <h1 class="profile__user-name">Jacques Cousteau</h1>
-                <img
-                  class="button button_type_edit"
-                  src="./images/button-edit.svg"
-                  alt="Edit button"
-                />
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_edit" type="button"></button>
               </div>
               <p class="profile__user-job">Explorer</p>
             </div>
           </div>
-          <img
-            class="button button_type_add"
-            src="./images/button-add.svg"
-            alt="add button"
-          />
+          <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+          <button class="button button_type_add" type="button"></button>
         </section>
         <section class="popup">
           <div class="popup__container">
-            <img
-              class="button button_type_close"
-              src="./images/button-close.svg"
-              alt="close button icon"
-            />
-            <form class="popup__form" action="#" method="get">
+            <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+            <button class="button button_type_close" type="button"></button>
+            <!-- added name attribute  to communicate with the server -->
+            <form name="form" class="popup__form" action="#" method="get">
               <h2 class="popup__form-title">Edit profile</h2>
+              <!-- added name attribute  to communicate with the server -->
               <input
+                name="name"
                 class="popup__form-input popup__form-input_type_name"
                 type="text"
                 placeholder="Name"
               />
+              <!-- added name attribute  to communicate with the server -->
               <input
+                name="job"
                 class="popup__form-input popup__form-input_type_job"
                 type="text"
                 placeholder="About me"
@@ -70,155 +66,78 @@
         </section>
         <section class="cards">
           <ul class="cards__card-grid">
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/yosemite-valley.png"
-                  alt="photo of Yosemite Valley"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Yosemite Valley</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <!-- removed article tags, left just li -->
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/yosemite-valley.png"
+                alt="photo of Yosemite Valley"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Yosemite Valley</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/lake-louise.png"
-                  alt="photo of Lake Louise"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Lake Louise</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/lake-louise.png"
+                alt="photo of Lake Louise"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lake Louise</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/bald-mountains.png"
-                  alt="photo of Bald Mountains"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Bald Mountains</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/bald-mountains.png"
+                alt="photo of Bald Mountains"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Bald Mountains</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/latemar.png"
-                  alt="photo of Latemar"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Latemar</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/latemar.png"
+                alt="photo of Latemar"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Latemar</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/vanoise-national-park.png"
-                  alt="photo of Vanoise National Parky"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Vanoise National Park</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/vanoise-national-park.png"
+                alt="photo of Vanoise National Parky"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Vanoise National Park</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
-            <li class="cards__card-item">
-              <article class="card">
-                <img
-                  class="card__image"
-                  src="./images/lago-di-braies.png"
-                  alt="photo of Lago di Braies"
-                />
-                <div class="card__info">
-                  <h2 class="card__title">Lago di Braies</h2>
-                  <svg
-                    class="button button_type_like"
-                    width="21"
-                    height="19"
-                    viewBox="0 0 21 19"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M19.3764 9.78586C21.5412 7.54338 21.5412 3.90213 19.3764 1.68186C17.2115 -0.560619 13.6964 -0.560619 11.5315 1.68186L10.4812 2.792L9.43098 1.70406C7.26614 -0.560619 3.75096 -0.560619 1.60755 1.68186C0.557285 2.76979 0 4.21297 0 5.74496C0 7.27695 0.578719 8.72013 1.60755 9.80806L10.4812 19L19.3764 9.78586ZM1.37178 5.74496C1.37178 4.59042 1.80046 3.52469 2.59352 2.72539C3.40801 1.88168 4.45828 1.45983 5.50855 1.45983C6.55882 1.45983 7.60909 1.88168 8.42358 2.72539L10.4812 4.83465L12.5389 2.70318C14.1465 1.03798 16.7829 1.03798 18.369 2.70318C19.1406 3.50248 19.5907 4.56821 19.5907 5.72276C19.5907 6.8773 19.162 7.94303 18.369 8.74233L10.4812 16.9351L2.59352 8.76453C1.82189 7.94303 1.37178 6.8773 1.37178 5.74496Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+            <li class="card">
+              <img
+                class="card__image"
+                src="./images/lago-di-braies.png"
+                alt="photo of Lago di Braies"
+              />
+              <div class="card__info">
+                <h2 class="card__title">Lago di Braies</h2>
+                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+                <button class="button button_type_like" type="button"></button>
+              </div>
             </li>
           </ul>
         </section>
