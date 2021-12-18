@@ -1,5 +1,5 @@
 .profile__user {
   display: flex;
-  justify-items: space-between;
+  justify-content: space-between;
   width: 100%;
 }
