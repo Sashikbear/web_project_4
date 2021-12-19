@@ -13,6 +13,8 @@
 }
 @media screen and (max-width: 1150px) {
   .profile__user-job {
+    font-size: 14px;
+    line-height: 1.21;
     text-align: center;
     padding: 14px 0 36px 0;
   }
