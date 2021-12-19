@@ -6,6 +6,7 @@
 }
 @media screen and (max-width: 1150px) {
   .profile__column {
+    width: 100%;
     flex-direction: column;
     align-items: center;
   }
