@@ -89,3 +89,21 @@ const populateCardGrid = () => {
   });
 };
 populateCardGrid();
+
+function openPopUpAddCard() {
+  openPopUp(popUpAddCard);
+}
+addButton.addEventListener("click", openPopUpAddCard);
+function closePopUpAddCard() {
+  closePopUp(popUpAddCard);
+}
+closeAddCardButton.addEventListener("click", closePopUpAddCard);
+
+function handleAddCardFormSubmit(evt) {
+  evt.preventDefault();
+  const card = { name: imageTitle.value, link: imageLink.value };
+  addCard(card);
+  closePopUpAddCard();
+}
+
+addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
