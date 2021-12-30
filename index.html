@@ -15,7 +15,6 @@
           src="./images/header-logo.svg"
           alt="Around the U.S. logo"
         />
-        <!-- set line as bottom border of the header -->
       </header>
       <main class="main">
         <section class="profile">
@@ -28,7 +27,7 @@
             <div class="profile__info">
               <div class="profile__user">
                 <h1 class="profile__user-name">Jacques Cousteau</h1>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_edit"
                   type="button"
@@ -38,49 +37,109 @@
               <p class="profile__user-job">Explorer</p>
             </div>
           </div>
-          <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
           <button
             class="button button_type_add"
             type="button"
             aria-label="add"
           ></button>
         </section>
-        <section class="popup">
-          <!-- refactored popup__container and popup__form, assigned absolure position to button_type_close relative to popup__container -->
+
+        <section class="popup popup_type_profile">
           <div class="popup__container">
-            <!-- used special button tag and set type attribute and  used icon as background image of the button-->
             <button
-              class="button button_type_close"
+              class="
+                button
+                button__button-close
+                button__button-close_location_profile
+              "
               type="button"
               aria-label="close"
             ></button>
-            <!-- added name attribute  to communicate with the server -->
-            <form name="form" class="popup__form" action="#" method="get">
+            <form
+              name="form"
+              class="popup__form popup__form_type_profile"
+              action="#"
+              method="get"
+            >
               <h2 class="popup__form-title">Edit profile</h2>
-              <!-- added name attribute  to communicate with the server -->
+
               <input
                 name="name"
                 class="popup__form-input popup__form-input_type_name"
                 type="text"
                 placeholder="Name"
               />
-              <!-- added name attribute  to communicate with the server -->
+
               <input
                 name="job"
                 class="popup__form-input popup__form-input_type_job"
                 type="text"
                 placeholder="About me"
               />
-              <button type="submit" class="button button_type_save">
+              <button
+                type="submit"
+                class="
+                  button
+                  button__button-submit
+                  button__button-submit_location_profile
+                "
+              >
                 Save
               </button>
             </form>
           </div>
         </section>
+
+        <section class="popup popup_type_add-card">
+          <div class="popup__container">
+            <button
+              class="
+                button
+                button__button-close
+                button__button-close_location_add-card
+              "
+              type="button"
+              aria-label="close"
+            ></button>
+            <form
+              name="form"
+              class="popup__form popup__form_type_add-card"
+              action="#"
+              method="get"
+            >
+              <h2 class="popup__form-title">New Place</h2>
+
+              <input
+                name="name"
+                class="popup__form-input popup__form-input_type_image-title"
+                type="text"
+                placeholder="Title"
+              />
+
+              <input
+                name="job"
+                class="popup__form-input popup__form-input_type_image-link"
+                type="text"
+                placeholder="Image Link"
+              />
+              <button
+                type="submit"
+                class="
+                  button
+                  button__button-submit
+                  button__button-submit_location_add-card
+                "
+              >
+                Create
+              </button>
+            </form>
+          </div>
+        </section>
+
         <section class="cards">
           <ul class="cards__card-grid">
-            <!-- removed article tags, left just li -->
-            <li class="card">
+            <!-- <li class="card">
               <img
                 class="card__image"
                 src="./images/yosemite-valley.png"
@@ -88,7 +147,7 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Yosemite Valley</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_like"
                   type="button"
@@ -104,7 +163,7 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Lake Louise</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_like"
                   type="button"
@@ -120,7 +179,7 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Bald Mountains</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_like"
                   type="button"
@@ -136,7 +195,7 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Latemar</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_like"
                   type="button"
@@ -152,7 +211,7 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Vanoise National Park</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
+
                 <button
                   class="button button_type_like"
                   type="button"
@@ -168,14 +227,13 @@
               />
               <div class="card__info">
                 <h2 class="card__title">Lago di Braies</h2>
-                <!-- used special button tag and set type attribute and  used icon as background image of the button-->
                 <button
                   class="button button_type_like"
                   type="button"
                   aria-label="like"
                 ></button>
               </div>
-            </li>
+            </li> -->
           </ul>
         </section>
       </main>
@@ -183,6 +241,19 @@
         <p class="footer__text">&copy; 2021 Around The U.S.</p>
       </footer>
     </div>
+    <template id="card">
+      <li class="card">
+        <img class="card__image" src="" alt="" />
+        <div class="card__info">
+          <h2 class="card__title"></h2>
+          <button
+            class="button button_type_like"
+            type="button"
+            aria-label="like"
+          ></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/script.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-.button_type_close {
+.button__button-close {
   position: absolute;
   height: 40px;
   top: -10%;
@@ -9,7 +9,7 @@
   background: url(../../../images/button-close.svg) no-repeat center;
 }
 @media screen and (max-width: 767px) {
-  .button_type_close {
+  .button__button-close {
     width: 26px;
     height: 26px;
     top: -13%;
