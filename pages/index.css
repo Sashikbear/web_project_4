@@ -24,6 +24,7 @@
 @import url(../blocks/button/__button-submit/button__button-submit.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/_type/button_type_like.css);
+@import url(../blocks/button/_type/button_type_delete.css);
 @import url(../blocks/cards/cards.css);
 @import url(../blocks/cards/__card-grid/cards__card-grid.css);
 @import url(../blocks/card/card.css);
