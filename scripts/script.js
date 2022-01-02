@@ -1,4 +1,7 @@
+// selecting DOM elements
+
 const editButton = document.querySelector(".button_type_edit");
+const addButton = document.querySelector(".button_type_add");
 const closeProfileButton = document.querySelector(
   ".button__button-close_location_profile"
 );
@@ -8,22 +11,22 @@ const closeAddCardButton = document.querySelector(
 const closeZoomCardButton = document.querySelector(
   ".button__button-close_location_zoom-card"
 );
-const addButton = document.querySelector(".button_type_add");
-
+const popUp = document.querySelector(".popup");
 const popUpProfile = document.querySelector(".popup_type_profile");
 const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
-const popUp = document.querySelector(".popup");
+const popUpAddCard = document.querySelector(".popup_type_add-card");
 const profileName = document.querySelector(".profile__user-name");
 const profileJob = document.querySelector(".profile__user-job");
 const nameInput = document.querySelector(".popup__form-input_type_name");
 const jobInput = document.querySelector(".popup__form-input_type_job");
 const profileFormElement = document.querySelector(".popup__form_type_profile");
 const addCardFormElement = document.querySelector(".popup__form_type_add-card");
-const popUpAddCard = document.querySelector(".popup_type_add-card");
 const imageTitle = document.querySelector(
   ".popup__form-input_type_image-title"
 );
 const imageLink = document.querySelector(".popup__form-input_type_image-link");
+
+// default array of cards, reversing it, so that prepend works for rendering the initial array in given order and adding new cards later on
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -50,95 +53,98 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ].reverse();
+// creating a new card
+const addCard = (card) => {
+  // selecting DOM element's contents
+  const cardTemplate = document.querySelector("#card").content;
+  // copying DOM element's contents
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  // giving values from the array of objects to properties
+  cardElement.querySelector(".card__image").src = card.link;
+  cardElement.querySelector(".card__image").alt = card.name;
+  cardElement.querySelector(".card__title").textContent = card.name;
+  // selecting parts of the new element
+  const cardImage = cardElement.querySelector(".card__image");
+  const deleteButton = cardElement.querySelector(".button_type_delete");
+  const likeButton = cardElement.querySelector(".button__button-like");
+  // adding functionality to the buttons
+  deleteButton.addEventListener("click", handleDeleteButton);
+  likeButton.addEventListener("click", handleLikeButton);
+  cardImage.addEventListener("click", handleCardImage);
+  return cardElement;
+};
+// passing the return of the addCard function to the new function to prepend the card
+const attachCard = (card) => {
+  const cardGrid = document.querySelector(".cards__card-grid");
+  cardGrid.prepend(addCard(card));
+};
+// itirating through the array of objects to prepend every card
+const populateCardGrid = () => {
+  initialCards.forEach((card) => {
+    attachCard(card);
+  });
+};
+// initiating the function to fill the grid th cards on page load
+populateCardGrid();
 
+// submitting form to change the text content of profile fields from the inputs
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  closePopUp(popUpProfile);
+}
+// zooming in on the picture
+function handleCardImage(evt) {
+  openPopUp(popUpImageZoom);
+  // selecting the DOm element
+  const imageZoom = document.querySelector(".popup__image");
+  const imageZoomTitle = document.querySelector(".popup__title");
+  // giving value to img properties using the event target, fetching the name from the alt prevously sourced from the name key
+  imageZoom.src = evt.target.src;
+  imageZoom.alt = evt.target.alt;
+  imageZoomTitle.textContent = evt.target.alt;
+}
+// deleting the closest parent of the button - the card in which this button is located
+function handleDeleteButton(evt) {
+  evt.target.closest(".card").remove();
+}
+// changing the class from tansparent heart to filled heart to create the liked effect
+function handleLikeButton(event) {
+  event.target.classList.toggle("button__button-like_active");
+}
+// submitting form to add a new object to the array with name and link keys and the values taken from the inputs
+function handleAddCardFormSubmit(evt) {
+  evt.preventDefault();
+  const card = { name: imageTitle.value, link: imageLink.value };
+  attachCard(card);
+  closePopUp(popUpAddCard);
+}
+// generic reusable functions for opening and closing every popup
 function openPopUp(popType) {
   popType.classList.add("popup_opened");
 }
 function closePopUp(popType) {
   popType.classList.remove("popup_opened");
 }
+// on opening the popup the input fields are prefilled from the hardcoded html text content
 function openPopUpProfile() {
   openPopUp(popUpProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
+// adding functionality to the buttons
 editButton.addEventListener("click", openPopUpProfile);
-function closePopUpProfile() {
-  closePopUp(popUpProfile);
-}
-closeProfileButton.addEventListener("click", closePopUpProfile);
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
+closeProfileButton.addEventListener("click", () => closePopUp(popUpProfile));
 
-  profileName.textContent = nameInput.value;
-  profileJob.textContent = jobInput.value;
-  closePopUpProfile();
-}
+closeZoomCardButton.addEventListener("click", () => closePopUp(popUpImageZoom));
+
+addButton.addEventListener("click", () => openPopUp(popUpAddCard));
+
+closeAddCardButton.addEventListener("click", () => closePopUp(popUpAddCard));
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
-
-const addCard = (card) => {
-  const cardTemplate = document.querySelector("#card").content;
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  cardElement.querySelector(".card__image").src = card.link;
-  cardElement.querySelector(".card__image").alt = card.name;
-  cardElement.querySelector(".card__title").textContent = card.name;
-  const cardImage = cardElement.querySelector(".card__image");
-  const deleteButton = cardElement.querySelector(".button_type_delete");
-  const likeButton = cardElement.querySelector(".button__button-like");
-  deleteButton.addEventListener("click", handleDeleteButton);
-  likeButton.addEventListener("click", handleLikeButton);
-  cardImage.addEventListener("click", handleCardImage);
-  return cardElement;
-};
-function openPopUpImageZoom() {
-  openPopUp(popUpImageZoom);
-}
-function closePopUpImageZoom() {
-  closePopUp(popUpImageZoom);
-}
-closeZoomCardButton.addEventListener("click", closePopUpImageZoom);
-function handleCardImage(evt) {
-  openPopUpImageZoom();
-  const imageZoom = document.querySelector(".popup__image");
-  const imageZoomTitle = document.querySelector(".popup__title");
-  imageZoom.src = evt.target.src;
-  imageZoom.alt = evt.target.alt;
-  imageZoomTitle.textContent = evt.target.alt;
-}
-
-function handleDeleteButton(evt) {
-  evt.target.closest(".card").remove();
-}
-function handleLikeButton(event) {
-  event.target.classList.toggle("button__button-like_active");
-}
-const putCard = (card) => {
-  const cardGrid = document.querySelector(".cards__card-grid");
-  cardGrid.prepend(addCard(card));
-};
-const populateCardGrid = () => {
-  initialCards.forEach((card) => {
-    putCard(card);
-  });
-};
-populateCardGrid();
-
-function openPopUpAddCard() {
-  openPopUp(popUpAddCard);
-}
-addButton.addEventListener("click", openPopUpAddCard);
-function closePopUpAddCard() {
-  closePopUp(popUpAddCard);
-}
-closeAddCardButton.addEventListener("click", closePopUpAddCard);
-
-function handleAddCardFormSubmit(evt) {
-  evt.preventDefault();
-  const card = { name: imageTitle.value, link: imageLink.value };
-  putCard(card);
-  closePopUpAddCard();
-}
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
