@@ -76,15 +76,16 @@ profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 const addCard = (card) => {
   const cardTemplate = document.querySelector("#card").content;
-
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__image").src = card.link;
   cardElement.querySelector(".card__image").alt = `photo of ${card.name}`;
   cardElement.querySelector(".card__title").textContent = card.name;
+  const cardImage = cardElement.querySelector(".card__image");
   const deleteButton = cardElement.querySelector(".button_type_delete");
   const likeButton = cardElement.querySelector(".button__button-like");
   deleteButton.addEventListener("click", handleDeleteButton);
   likeButton.addEventListener("click", handleLikeButton);
+  cardImage.addEventListener("click", handleCardImage);
   return cardElement;
 };
 
@@ -117,7 +118,7 @@ closeAddCardButton.addEventListener("click", closePopUpAddCard);
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
   const card = { name: imageTitle.value, link: imageLink.value };
-  addCard(card);
+  putCard(card);
   closePopUpAddCard();
 }
 
