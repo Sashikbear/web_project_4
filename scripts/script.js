@@ -6,6 +6,7 @@ const closeAddCardButton = document.querySelector(
   ".button__button-close_location_add-card"
 );
 const addButton = document.querySelector(".button_type_add");
+
 const popUpProfile = document.querySelector(".popup_type_profile");
 const popUp = document.querySelector(".popup");
 const profileName = document.querySelector(".profile__user-name");
@@ -75,17 +76,31 @@ profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 const addCard = (card) => {
   const cardTemplate = document.querySelector("#card").content;
-  const cardGrid = document.querySelector(".cards__card-grid");
+
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__image").src = card.link;
   cardElement.querySelector(".card__image").alt = `photo of ${card.name}`;
   cardElement.querySelector(".card__title").textContent = card.name;
-  cardGrid.prepend(cardElement);
+  const deleteButton = cardElement.querySelector(".button_type_delete");
+  const likeButton = cardElement.querySelector(".button__button-like");
+  deleteButton.addEventListener("click", handleDeleteButton);
+  likeButton.addEventListener("click", handleLikeButton);
+  return cardElement;
 };
 
+function handleDeleteButton(evt) {
+  evt.target.closest(".card").remove();
+}
+function handleLikeButton(event) {
+  event.target.classList.toggle("button__button-like_active");
+}
+const putCard = (card) => {
+  const cardGrid = document.querySelector(".cards__card-grid");
+  cardGrid.prepend(addCard(card));
+};
 const populateCardGrid = () => {
   initialCards.forEach((card) => {
-    addCard(card);
+    putCard(card);
   });
 };
 populateCardGrid();
