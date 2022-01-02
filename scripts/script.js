@@ -2,14 +2,10 @@
 
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
-const closeProfileButton = document.querySelector(
-  ".button__button-close_location_profile"
-);
-const closeAddCardButton = document.querySelector(
-  ".button__button-close_location_add-card"
-);
+const closeProfileButton = document.querySelector(".button_location_profile");
+const closeAddCardButton = document.querySelector(".button_location_add-card");
 const closeZoomCardButton = document.querySelector(
-  ".button__button-close_location_zoom-card"
+  ".button_location_zoom-card"
 );
 const popUp = document.querySelector(".popup");
 const popUpProfile = document.querySelector(".popup_type_profile");
@@ -66,7 +62,7 @@ const addCard = (card) => {
   // selecting parts of the new element
   const cardImage = cardElement.querySelector(".card__image");
   const deleteButton = cardElement.querySelector(".button_type_delete");
-  const likeButton = cardElement.querySelector(".button__button-like");
+  const likeButton = cardElement.querySelector(".button_type_like");
   // adding functionality to the buttons
   deleteButton.addEventListener("click", handleDeleteButton);
   likeButton.addEventListener("click", handleLikeButton);
@@ -112,7 +108,7 @@ function handleDeleteButton(evt) {
 }
 // changing the class from tansparent heart to filled heart to create the liked effect
 function handleLikeButton(event) {
-  event.target.classList.toggle("button__button-like_active");
+  event.target.classList.toggle("button_active");
 }
 // submitting form to add a new object to the array with name and link keys and the values taken from the inputs
 function handleAddCardFormSubmit(evt) {
