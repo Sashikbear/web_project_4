@@ -5,9 +5,13 @@ const closeProfileButton = document.querySelector(
 const closeAddCardButton = document.querySelector(
   ".button__button-close_location_add-card"
 );
+const closeZoomCardButton = document.querySelector(
+  ".button__button-close_location_zoom-card"
+);
 const addButton = document.querySelector(".button_type_add");
 
 const popUpProfile = document.querySelector(".popup_type_profile");
+const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
 const popUp = document.querySelector(".popup");
 const profileName = document.querySelector(".profile__user-name");
 const profileJob = document.querySelector(".profile__user-job");
@@ -78,7 +82,7 @@ const addCard = (card) => {
   const cardTemplate = document.querySelector("#card").content;
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__image").src = card.link;
-  cardElement.querySelector(".card__image").alt = `photo of ${card.name}`;
+  cardElement.querySelector(".card__image").alt = card.name;
   cardElement.querySelector(".card__title").textContent = card.name;
   const cardImage = cardElement.querySelector(".card__image");
   const deleteButton = cardElement.querySelector(".button_type_delete");
@@ -88,6 +92,21 @@ const addCard = (card) => {
   cardImage.addEventListener("click", handleCardImage);
   return cardElement;
 };
+function openPopUpImageZoom() {
+  openPopUp(popUpImageZoom);
+}
+function closePopUpImageZoom() {
+  closePopUp(popUpImageZoom);
+}
+closeZoomCardButton.addEventListener("click", closePopUpImageZoom);
+function handleCardImage(evt) {
+  openPopUpImageZoom();
+  const imageZoom = document.querySelector(".popup__image");
+  const imageZoomTitle = document.querySelector(".popup__title");
+  imageZoom.src = evt.target.src;
+  imageZoom.alt = evt.target.alt;
+  imageZoomTitle.textContent = evt.target.alt;
+}
 
 function handleDeleteButton(evt) {
   evt.target.closest(".card").remove();
