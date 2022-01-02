@@ -15,12 +15,16 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__zoom-wrapper/popup__zoom-wrapper.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form-title/popup__form-title.css);
-@import url(../blocks/popup/__form-input/popup__form-input.CSS);
+@import url(../blocks/popup/__form-input/popup__form-input.css);
+@import url(../blocks/popup/__image/popup__image.css);
+@import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/button/button.css);
 @import url(../blocks/button/_type/button_type_add.css);
 @import url(../blocks/button/__button-close/button__button-close.css);
+@import url(../blocks/button/__button-close/_location/button__button-close_location_zoom-card.css);
 @import url(../blocks/button/__button-submit/button__button-submit.css);
 @import url(../blocks/button/_type/button_type_edit.css);
 @import url(../blocks/button/__button-like/button__button-like.css);
