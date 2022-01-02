@@ -20,6 +20,9 @@ The tools used for the project include:
 - calc()
 - @media
 - font-face
+- visibility
+- transition
+- opacity
 
 **JS**
 
@@ -30,6 +33,14 @@ The tools used for the project include:
 - classList.toggle
 - textContent
 - addEventListener
+- closest
+- forEach
+- append/prepend
+- remove
+- add
+- reverse
+- toggle
+- event.target
 
 **Link**
 
