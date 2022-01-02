@@ -1,9 +1,9 @@
 .wrapper {
   max-width: 880px;
   margin: 0 auto;
-  padding: 45px 200px 65px 200px;
+  padding: 45px 0 65px 0;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 900px) {
   .wrapper {
     width: 100%;
     margin: 0;

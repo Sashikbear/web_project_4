@@ -4,17 +4,13 @@
   margin: 0;
   list-style: none;
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(3, calc((100% / 3) - 34px / 3));
   grid-template-rows: auto;
   grid-gap: 20px 17px;
 }
-@media screen and (min-width: 768px) and (max-width: 1150px) {
+@media screen and (max-width: 900px) {
   .cards__card-grid {
-    grid-template-columns: repeat(2, calc((100% / 2) - 28px / 2));
-  }
-}
-@media screen and (max-width: 767px) {
-  .cards__card-grid {
-    grid-template-columns: 100%;
+    grid-template-columns: repeat(auto-fit, 282px);
   }
 }
