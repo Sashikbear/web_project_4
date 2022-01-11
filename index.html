@@ -105,18 +105,26 @@
               <h2 class="popup__form-title">New Place</h2>
 
               <input
+                id="title-input"
                 name="name"
                 class="popup__input popup__input_type_image-title"
                 type="text"
                 placeholder="Title"
+                minlength="1"
+                maxlength="30"
+                required
               />
-
+              <span class="popup__error title-input-error"></span>
               <input
+                id="url-input"
+                type="url"
                 name="job"
                 class="popup__input popup__input_type_image-link"
                 type="text"
                 placeholder="Image Link"
+                required
               />
+              <span class="popup__error url-input-error"></span>
               <button type="submit" class="popup__button">Create</button>
             </form>
           </div>
