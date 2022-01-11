@@ -12,14 +12,12 @@ const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
 const popUpAddCard = document.querySelector(".popup_type_add-card");
 const profileName = document.querySelector(".profile__user-name");
 const profileJob = document.querySelector(".profile__user-job");
-const nameInput = document.querySelector(".popup__form-input_type_name");
-const jobInput = document.querySelector(".popup__form-input_type_job");
+const nameInput = document.querySelector(".popup__input_type_name");
+const jobInput = document.querySelector(".popup__input_type_job");
 const profileFormElement = document.querySelector(".popup__form_type_profile");
 const addCardFormElement = document.querySelector(".popup__form_type_add-card");
-const imageTitle = document.querySelector(
-  ".popup__form-input_type_image-title"
-);
-const imageLink = document.querySelector(".popup__form-input_type_image-link");
+const imageTitle = document.querySelector(".popup__input_type_image-title");
+const imageLink = document.querySelector(".popup__input_type_image-link");
 const imageZoom = document.querySelector(".popup__image");
 const imageZoomTitle = document.querySelector(".popup__title");
 
