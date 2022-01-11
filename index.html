@@ -57,6 +57,7 @@
               class="popup__form popup__form_type_profile"
               action="#"
               method="get"
+              novalidate
             >
               <h2 class="popup__form-title">Edit profile</h2>
 
@@ -70,7 +71,7 @@
                 maxlength="40"
                 required
               />
-              <span class="popup__input_type_error name-input-error"></span>
+              <span class="popup__error name-input-error"></span>
               <input
                 id="job-input"
                 name="job"
@@ -81,13 +82,8 @@
                 maxlength="200"
                 required
               />
-              <span class="popup__input_type_error job-input-error"></span>
-              <button
-                type="submit"
-                class="button button_type_submit button_place_profile popup__button"
-              >
-                Save
-              </button>
+              <span class="popup__error job-input-error"></span>
+              <button type="submit" class="popup__button">Save</button>
             </form>
           </div>
         </section>
@@ -104,6 +100,7 @@
               class="popup__form popup__form_type_add-card"
               action="#"
               method="get"
+              novalidate
             >
               <h2 class="popup__form-title">New Place</h2>
 
@@ -120,12 +117,7 @@
                 type="text"
                 placeholder="Image Link"
               />
-              <button
-                type="submit"
-                class="button button_type_submit button_place_add-card popup__button"
-              >
-                Create
-              </button>
+              <button type="submit" class="popup__button">Create</button>
             </form>
           </div>
         </section>
@@ -167,5 +159,6 @@
       </li>
     </template>
     <script src="./scripts/script.js"></script>
+    <script src="./scripts/validate.js"></script>
   </body>
 </html>
