@@ -4,11 +4,6 @@ import { resetForm, config } from "./validate.js";
 const cardGrid = document.querySelector(".cards__card-grid");
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
-const closeProfileButton = document.querySelector(".button_location_profile");
-const closeAddCardButton = document.querySelector(".button_location_add-card");
-const closeZoomCardButton = document.querySelector(
-  ".button_location_zoom-card"
-);
 const popUpProfile = document.querySelector(".popup_type_profile");
 const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
 const popUpAddCard = document.querySelector(".popup_type_add-card");
@@ -114,12 +109,14 @@ function handleAddCardFormSubmit(evt) {
   addCardFormElement.reset();
   closePopUp(popUpAddCard);
 }
-// generic reusable functions for opening and closing every popup
+// generic reusable functions for opening and closing every popup including adding and removing eventlistener on keydown
 function openPopUp(popType) {
   popType.classList.add("popup_opened");
+  document.addEventListener("keydown", closeByEscape);
 }
 function closePopUp(popType) {
   popType.classList.remove("popup_opened");
+  document.removeEventListener("keydown", closeByEscape);
 }
 // on opening the popup the input fields are prefilled from the hardcoded html text content
 function openPopUpProfile() {
@@ -128,28 +125,39 @@ function openPopUpProfile() {
   jobInput.value = profileJob.textContent;
 }
 // for each of the popups add 2 eventlisteners to close the modal on clicking outside the modal and on pressing esc
-function closePopUpOnMouseOutKeyDown(allPopUps) {
+function closePopUpOnMouseOut(allPopUps) {
   allPopUps.forEach((popUp) => {
     popUp.addEventListener("click", function (evt) {
       closePopUp(evt.target);
     });
-    document.addEventListener("keydown", function (evt) {
-      if (evt.key === "Escape") closePopUp(popUp);
-    });
   });
 }
-closePopUpOnMouseOutKeyDown(allPopUps);
+closePopUpOnMouseOut(allPopUps);
+//  function closing the opened popup in the event of escape key
+function closeByEscape(evt) {
+  if (evt.key === "Escape") {
+    // find the opened popup
+    const openedPopUp = document.querySelector(".popup_opened");
+    // close the opened popup with `closePopup`
+    closePopUp(openedPopUp);
+  }
+}
+//universal function going through all popups and attacheing to each eventlisteners to close popup in case if the clicked target is either the overlay (the outside of the popup) or the close button
+allPopUps.forEach((popup) => {
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      closePopUp(popup);
+    }
+    if (evt.target.classList.contains("button_type_close")) {
+      closePopUp(popup);
+    }
+  });
+});
 
-// adding functionality to the buttons
+// adding other eventlisteners
 editButton.addEventListener("click", openPopUpProfile);
 
-closeProfileButton.addEventListener("click", () => closePopUp(popUpProfile));
-
-closeZoomCardButton.addEventListener("click", () => closePopUp(popUpImageZoom));
-
 addButton.addEventListener("click", handleAddButton);
-
-closeAddCardButton.addEventListener("click", () => closePopUp(popUpAddCard));
 
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 

@@ -1,4 +1,4 @@
-//config object with all the classes used for secelting and manipulating form elements
+//config object with all the classes used for selecting and manipulating form elements
 export const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
