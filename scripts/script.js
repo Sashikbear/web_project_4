@@ -101,7 +101,7 @@ function handleDeleteButton(evt) {
 function handleLikeButton(event) {
   event.target.classList.toggle("button_active");
 }
-
+// on pressing add button run this function that resets the form and disables the submit button
 function handleAddButton() {
   resetForm(addCardFormElement, config);
   openPopUp(popUpAddCard);
@@ -127,7 +127,7 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
-
+// for each of the popups add 2 eventlisteners to close the modal on clicking outside the modal and on pressing esc
 function closePopUpOnMouseOutKeyDown(allPopUps) {
   allPopUps.forEach((popUp) => {
     popUp.addEventListener("click", function (evt) {
@@ -139,6 +139,7 @@ function closePopUpOnMouseOutKeyDown(allPopUps) {
   });
 }
 closePopUpOnMouseOutKeyDown(allPopUps);
+
 // adding functionality to the buttons
 editButton.addEventListener("click", openPopUpProfile);
 

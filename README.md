@@ -41,6 +41,11 @@ The tools used for the project include:
 - reverse
 - toggle
 - event.target
+- import/export
+- Array.from
+- errorMessage
+- objects as params
+- some
 
 **Link**
 
