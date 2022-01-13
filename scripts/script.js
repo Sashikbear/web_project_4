@@ -1,3 +1,5 @@
+import { resetForm, config } from "./validate.js";
+
 // selecting DOM elements
 const cardGrid = document.querySelector(".cards__card-grid");
 const editButton = document.querySelector(".button_type_edit");
@@ -99,6 +101,11 @@ function handleDeleteButton(evt) {
 function handleLikeButton(event) {
   event.target.classList.toggle("button_active");
 }
+
+function handleAddButton() {
+  resetForm(addCardFormElement, config);
+  openPopUp(popUpAddCard);
+}
 // submitting form to add a new object to the array with name and link keys and the values taken from the inputs
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
@@ -125,9 +132,9 @@ function closePopUpOnMouseOutKeyDown(allPopUps) {
   allPopUps.forEach((popUp) => {
     popUp.addEventListener("click", function (evt) {
       closePopUp(evt.target);
-      document.addEventListener("keydown", function (evt) {
-        if (evt.key === "Escape") closePopUp(popUp);
-      });
+    });
+    document.addEventListener("keydown", function (evt) {
+      if (evt.key === "Escape") closePopUp(popUp);
     });
   });
 }
@@ -139,7 +146,7 @@ closeProfileButton.addEventListener("click", () => closePopUp(popUpProfile));
 
 closeZoomCardButton.addEventListener("click", () => closePopUp(popUpImageZoom));
 
-addButton.addEventListener("click", () => openPopUp(popUpAddCard));
+addButton.addEventListener("click", handleAddButton);
 
 closeAddCardButton.addEventListener("click", () => closePopUp(popUpAddCard));
 

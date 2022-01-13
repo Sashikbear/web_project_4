@@ -1,4 +1,4 @@
-const config = {
+export const config = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
   submitButtonSelector: ".popup__button",
@@ -6,7 +6,16 @@ const config = {
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__error_visible",
 };
-
+export function resetForm(formElement, config) {
+  const inputList = Array.from(
+    formElement.querySelectorAll(config.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, config);
+    toggleButtonState(inputList, buttonElement, config);
+  });
+}
 const showInputError = (formElement, inputElement, errorMessage, config) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(config.inputErrorClass);
