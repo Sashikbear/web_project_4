@@ -121,21 +121,17 @@ function openPopUpProfile() {
   jobInput.value = profileJob.textContent;
 }
 
-function closePopUpOnOutsideClick(allPopUps) {
+function closePopUpOnMouseOutKeyDown(allPopUps) {
   allPopUps.forEach((popUp) => {
     popUp.addEventListener("click", function (evt) {
-      if (evt.target === evt.currentTarget) closePopUp(evt.target);
+      closePopUp(evt.target);
+      document.addEventListener("keydown", function (evt) {
+        if (evt.key === "Escape") closePopUp(popUp);
+      });
     });
   });
 }
-function closePopUpOnKeyDown(allPopUps) {
-  allPopUps.forEach((popUp) => {
-    popUp.addEventListener("click", function (evt) {});
-    document.addEventListener("keydown", function (evt) {
-      if (evt.key === "Escape") closePopUp(popUp);
-    });
-  });
-}
+closePopUpOnMouseOutKeyDown(allPopUps);
 // adding functionality to the buttons
 editButton.addEventListener("click", openPopUpProfile);
 
@@ -150,6 +146,3 @@ closeAddCardButton.addEventListener("click", () => closePopUp(popUpAddCard));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
-
-closePopUpOnOutsideClick(allPopUps);
-closePopUpOnKeyDown(allPopUps);
