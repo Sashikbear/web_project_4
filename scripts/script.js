@@ -20,6 +20,7 @@ const imageTitle = document.querySelector(".popup__input_type_image-title");
 const imageLink = document.querySelector(".popup__input_type_image-link");
 const imageZoom = document.querySelector(".popup__image");
 const imageZoomTitle = document.querySelector(".popup__title");
+const allPopUps = document.querySelectorAll(".popup");
 
 // default array of cards, reversing it, so that prepend works for rendering the initial array in given order and adding new cards later on
 const initialCards = [
@@ -119,6 +120,22 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
+
+function closePopUpOnOutsideClick(allPopUps) {
+  allPopUps.forEach((popUp) => {
+    popUp.addEventListener("click", function (evt) {
+      if (evt.target === evt.currentTarget) closePopUp(evt.target);
+    });
+  });
+}
+function closePopUpOnKeyDown(allPopUps) {
+  allPopUps.forEach((popUp) => {
+    popUp.addEventListener("click", function (evt) {});
+    document.addEventListener("keydown", function (evt) {
+      if (evt.key === "Escape") closePopUp(popUp);
+    });
+  });
+}
 // adding functionality to the buttons
 editButton.addEventListener("click", openPopUpProfile);
 
@@ -133,3 +150,6 @@ closeAddCardButton.addEventListener("click", () => closePopUp(popUpAddCard));
 profileFormElement.addEventListener("submit", handleProfileFormSubmit);
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+
+closePopUpOnOutsideClick(allPopUps);
+closePopUpOnKeyDown(allPopUps);
