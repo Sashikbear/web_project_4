@@ -124,15 +124,6 @@ function openPopUpProfile() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 }
-// for each of the popups add 2 eventlisteners to close the modal on clicking outside the modal and on pressing esc
-function closePopUpOnMouseOut(allPopUps) {
-  allPopUps.forEach((popUp) => {
-    popUp.addEventListener("click", function (evt) {
-      closePopUp(evt.target);
-    });
-  });
-}
-closePopUpOnMouseOut(allPopUps);
 //  function closing the opened popup in the event of escape key
 function closeByEscape(evt) {
   if (evt.key === "Escape") {
