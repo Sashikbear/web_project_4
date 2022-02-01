@@ -107,11 +107,13 @@ class Card {
   }
 }
 
+const attachCard = (card) => {
+  document.querySelector(".cards__card-grid").prepend(card);
+};
+
 initialCards.forEach((initialCard) => {
   const card = new Card(initialCard, "#card");
-  const cardElement = card.generateCard();
-
-  document.querySelector(".cards__card-grid").prepend(cardElement);
+  attachCard(card.generateCard());
 });
 
 function handleProfileFormSubmit(evt) {
@@ -130,8 +132,12 @@ function handleAddButton() {
 // submitting form to add a new object to the array with name and link keys and the values taken from the inputs
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const card = { name: imageTitle.value, link: imageLink.value };
-  attachCard(card);
+  const newCard = {
+    name: imageTitle.value,
+    link: imageLink.value,
+  };
+  const card = new Card(newCard, "#card");
+  attachCard(card.generateCard());
   addCardFormElement.reset();
   closePopUp(popUpAddCard);
 }
