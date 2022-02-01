@@ -1,4 +1,4 @@
-import { resetForm, config } from "./validate.js";
+import { config, FormValidator } from "./validate.js";
 
 // selecting DOM elements
 const editButton = document.querySelector(".button_type_edit");
@@ -44,9 +44,9 @@ const initialCards = [
 ].reverse();
 
 class Card {
-  constructor(name, link, cardSelector) {
-    this._name = name;
-    this._link = link;
+  constructor(card, cardSelector) {
+    this._name = card.name;
+    this._link = card.link;
     this._cardSelector = cardSelector;
   }
   _getTemplate() {
@@ -108,7 +108,7 @@ class Card {
 }
 
 initialCards.forEach((initialCard) => {
-  const card = new Card(initialCard.name, initialCard.link, "#card");
+  const card = new Card(initialCard, "#card");
   const cardElement = card.generateCard();
 
   document.querySelector(".cards__card-grid").prepend(cardElement);
@@ -123,7 +123,8 @@ function handleProfileFormSubmit(evt) {
 }
 
 function handleAddButton() {
-  resetForm(addCardFormElement, config);
+  const valid = new FormValidator(config, addCardFormElement);
+  valid.resetForm();
   openPopUp(popUpAddCard);
 }
 // submitting form to add a new object to the array with name and link keys and the values taken from the inputs
