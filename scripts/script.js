@@ -1,11 +1,9 @@
 import { resetForm, config } from "./validate.js";
 
 // selecting DOM elements
-const cardGrid = document.querySelector(".cards__card-grid");
 const editButton = document.querySelector(".button_type_edit");
 const addButton = document.querySelector(".button_type_add");
 const popUpProfile = document.querySelector(".popup_type_profile");
-const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
 const popUpAddCard = document.querySelector(".popup_type_add-card");
 const profileName = document.querySelector(".profile__user-name");
 const profileJob = document.querySelector(".profile__user-job");
@@ -15,8 +13,6 @@ const profileFormElement = document.querySelector(".popup__form_type_profile");
 const addCardFormElement = document.querySelector(".popup__form_type_add-card");
 const imageTitle = document.querySelector(".popup__input_type_image-title");
 const imageLink = document.querySelector(".popup__input_type_image-link");
-const imageZoom = document.querySelector(".popup__image");
-const imageZoomTitle = document.querySelector(".popup__title");
 const allPopUps = document.querySelectorAll(".popup");
 
 // default array of cards, reversing it, so that prepend works for rendering the initial array in given order and adding new cards later on
@@ -46,33 +42,78 @@ const initialCards = [
     link: "https://code.s3.yandex.net/web-code/lago.jpg",
   },
 ].reverse();
-// creating a new card
-const addCard = (card) => {
-  // selecting DOM element's contents
-  const cardTemplate = document.querySelector("#card").content;
-  // copying DOM element's contents
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
-  // selecting parts of the new element
-  const cardImage = cardElement.querySelector(".card__image");
-  const deleteButton = cardElement.querySelector(".button_type_delete");
-  const likeButton = cardElement.querySelector(".button_type_like");
-  // giving values from the array of objects to properties
-  cardImage.src = card.link;
-  cardImage.alt = card.name;
-  cardElement.querySelector(".card__title").textContent = card.name;
-  // adding functionality to the buttons
-  deleteButton.addEventListener("click", handleDeleteButton);
-  likeButton.addEventListener("click", handleLikeButton);
-  cardImage.addEventListener("click", handleCardImage);
-  return cardElement;
-};
-// passing the return of the addCard function to the new function to prepend the card
-const attachCard = (card) => {
-  cardGrid.prepend(addCard(card));
-};
-initialCards.forEach(attachCard);
-// submitting form to change the text content of profile fields from the inputs
+class Card {
+  constructor(name, link, cardSelector) {
+    this._name = name;
+    this._link = link;
+    this._cardSelector = cardSelector;
+  }
+  _getTemplate() {
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content.querySelector(".card")
+      .cloneNode(true);
+
+    this._element = cardElement;
+  }
+
+  _setEventListeners() {
+    this._element
+      .querySelector(".button_type_delete")
+      .addEventListener("click", () => {
+        this._handleDeleteButton();
+      });
+    this._element
+      .querySelector(".button_type_like")
+      .addEventListener("click", () => {
+        this._handleLikeButton();
+      });
+    this._element
+      .querySelector(".card__image")
+      .addEventListener("click", () => {
+        this._handleCardImage();
+      });
+  }
+
+  _handleDeleteButton() {
+    this._element
+      .querySelector(".button_type_delete")
+      .closest(".card")
+      .remove();
+  }
+  _handleLikeButton() {
+    this._element
+      .querySelector(".button_type_like")
+      .classList.toggle("button_active");
+  }
+  _handleCardImage() {
+    const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
+    const imageZoom = document.querySelector(".popup__image");
+    const imageZoomTitle = document.querySelector(".popup__title");
+    openPopUp(popUpImageZoom);
+    imageZoom.src = this._element.querySelector(".card__image").src;
+    imageZoom.alt = this._element.querySelector(".card__title").textContent;
+    imageZoomTitle.textContent =
+      this._element.querySelector(".card__title").textContent;
+  }
+  generateCard() {
+    this._getTemplate();
+    this._setEventListeners();
+    this._element.querySelector(".card__image").src = this._link;
+    this._element.querySelector(".card__image").alt = this._link;
+    this._element.querySelector(".card__title").textContent = this._name;
+    return this._element;
+  }
+}
+
+initialCards.forEach((initialCard) => {
+  const card = new Card(initialCard.name, initialCard.link, "#card");
+  const cardElement = card.generateCard();
+
+  document.querySelector(".cards__card-grid").prepend(cardElement);
+});
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
@@ -80,23 +121,7 @@ function handleProfileFormSubmit(evt) {
   profileJob.textContent = jobInput.value;
   closePopUp(popUpProfile);
 }
-// zooming in on the picture
-function handleCardImage(evt) {
-  openPopUp(popUpImageZoom);
-  // giving value to img properties using the event target, fetching the name from the alt prevously sourced from the name key
-  imageZoom.src = evt.target.src;
-  imageZoom.alt = evt.target.alt;
-  imageZoomTitle.textContent = evt.target.alt;
-}
-// deleting the closest parent of the button - the card in which this button is located
-function handleDeleteButton(evt) {
-  evt.target.closest(".card").remove();
-}
-// changing the class from tansparent heart to filled heart to create the liked effect
-function handleLikeButton(event) {
-  event.target.classList.toggle("button_active");
-}
-// on pressing add button run this function that resets the form and disables the submit button
+
 function handleAddButton() {
   resetForm(addCardFormElement, config);
   openPopUp(popUpAddCard);
@@ -133,6 +158,7 @@ function closeByEscape(evt) {
     closePopUp(openedPopUp);
   }
 }
+
 //universal function going through all popups and attacheing to each eventlisteners to close popup in case if the clicked target is either the overlay (the outside of the popup) or the close button
 allPopUps.forEach((popup) => {
   popup.addEventListener("click", (evt) => {
