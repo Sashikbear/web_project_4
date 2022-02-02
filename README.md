@@ -46,6 +46,9 @@ The tools used for the project include:
 - errorMessage
 - objects as params
 - some
+- class
+- modules
+- OOP principals
 
 **Link**
 
