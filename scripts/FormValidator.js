@@ -1,14 +1,4 @@
-//config object with all the classes used for selecting and manipulating form elements
-export const config = {
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__button",
-  inactiveButtonClass: "popup__button_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__error_visible",
-};
-
-export class FormValidator {
+export default class FormValidator {
   constructor(config, formElement) {
     this._formSelector = config.formSelector;
     this._inputSelector = config.inputSelector;
@@ -88,12 +78,3 @@ export class FormValidator {
     this._setEventListeners();
   }
 }
-function enableValidation(config) {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const valid = new FormValidator(config, formElement);
-    valid.enableValidation();
-  });
-}
-
-enableValidation(config);
