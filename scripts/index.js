@@ -1,11 +1,19 @@
 import FormValidator from "./FormValidator.js";
 import Card from "./Card.js";
 import * as utils from "./utils.js";
-
-const editButton = document.querySelector(".button_type_edit");
-const addButton = document.querySelector(".button_type_add");
+const popUpProfile = document.querySelector(".popup_type_profile");
+const popUpAddCard = document.querySelector(".popup_type_add-card");
+const profileName = document.querySelector(".profile__user-name");
+const profileJob = document.querySelector(".profile__user-job");
+const nameInput = document.querySelector(".popup__input_type_name");
+const jobInput = document.querySelector(".popup__input_type_job");
+const imageTitle = document.querySelector(".popup__input_type_image-title");
+const imageLink = document.querySelector(".popup__input_type_image-link");
+const allPopUps = document.querySelectorAll(".popup");
 const profileFormElement = document.querySelector(".popup__form_type_profile");
 const addCardFormElement = document.querySelector(".popup__form_type_add-card");
+const editButton = document.querySelector(".button_type_edit");
+const addButton = document.querySelector(".button_type_add");
 
 const initialCards = [
   {
@@ -52,22 +60,62 @@ initialCards.forEach((initialCard) => {
   attachCard(card.generateCard());
 });
 
-function enableValidation(config) {
-  const formList = Array.from(document.querySelectorAll(config.formSelector));
-  formList.forEach((formElement) => {
-    const valid = new FormValidator(config, formElement);
-    valid.enableValidation();
-  });
+const addCardFormValidator = new FormValidator(config, addCardFormElement);
+addCardFormValidator.enableValidation();
+
+function handleAddButton() {
+  addCardFormValidator.resetForm();
+  utils.openPopUp(popUpAddCard);
 }
 
-enableValidation(config);
+function handleAddCardFormSubmit(evt) {
+  evt.preventDefault();
+  const newCard = {
+    name: imageTitle.value,
+    link: imageLink.value,
+  };
+  const card = new Card(newCard, "#card", utils.openPopUp);
+  attachCard(card.generateCard());
+  addCardFormValidator.resetForm();
+  utils.closePopUp(popUpAddCard);
+}
 
-editButton.addEventListener("click", utils.openPopUpProfile);
+const profileFormValidator = new FormValidator(config, profileFormElement);
+profileFormValidator.enableValidation();
 
-addButton.addEventListener("click", utils.handleAddButton);
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
 
-profileFormElement.addEventListener("submit", utils.handleProfileFormSubmit);
+  profileName.textContent = nameInput.value;
+  profileJob.textContent = jobInput.value;
+  utils.closePopUp(popUpProfile);
+}
+function openPopUpProfile() {
+  utils.openPopUp(popUpProfile);
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
+}
+allPopUps.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_opened")) {
+      utils.closePopUp(popup);
+    }
+    if (evt.target.classList.contains("button_type_close")) {
+      utils.closePopUp(popup);
+    }
+  });
+});
 
-addCardFormElement.addEventListener("submit", utils.handleAddCardFormSubmit);
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
+
+editButton.addEventListener("click", openPopUpProfile);
+
+addButton.addEventListener("click", handleAddButton);
+
+profileFormElement.addEventListener("submit", handleProfileFormSubmit);
+
+addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 export { config, attachCard };

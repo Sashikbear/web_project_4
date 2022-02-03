@@ -5,45 +5,40 @@ export default class Card {
     this._cardSelector = cardSelector;
     this._openPopUp = openPopUp;
   }
+  // getter now returns an element
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-
-    this._element = cardElement;
+    return cardElement;
   }
 
   _setEventListeners() {
     this._element
       .querySelector(".button_type_delete")
-      .addEventListener("click", () => {
-        this._handleDeleteButton();
-      });
+      .addEventListener("click", this._handleDeleteButton);
     this._element
       .querySelector(".button_type_like")
-      .addEventListener("click", () => {
-        this._handleLikeButton();
-      });
+      .addEventListener("click", this._handleLikeButton);
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", () => {
-        this._handleCardImage();
-      });
+      .addEventListener("click", this._handleCardImage);
   }
+  // using arrow functions in methods instead of when calling on the method inside an event listener
+  // removing the card correctly and setting element to null to remove the link to the DOM element
+  _handleDeleteButton = () => {
+    this._element.remove();
+    this._element = null;
+  };
 
-  _handleDeleteButton() {
-    this._element
-      .querySelector(".button_type_delete")
-      .closest(".card")
-      .remove();
-  }
-  _handleLikeButton() {
+  _handleLikeButton = () => {
     this._element
       .querySelector(".button_type_like")
       .classList.toggle("button_active");
-  }
-  _handleCardImage() {
+  };
+
+  _handleCardImage = () => {
     const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
     const imageZoom = document.querySelector(".popup__image");
     const imageZoomTitle = document.querySelector(".popup__title");
@@ -52,13 +47,16 @@ export default class Card {
     imageZoom.alt = this._element.querySelector(".card__title").textContent;
     imageZoomTitle.textContent =
       this._element.querySelector(".card__title").textContent;
-  }
+  };
+  // using the element created in getTemplate method
   generateCard() {
-    this._getTemplate();
+    this._element = this._getTemplate();
     this._setEventListeners();
-    this._element.querySelector(".card__image").src = this._link;
-    this._element.querySelector(".card__image").alt = this._link;
-    this._element.querySelector(".card__title").textContent = this._name;
+    const cardImage = this._element.querySelector(".card__image");
+    const cardName = this._element.querySelector(".card__title");
+    cardImage.src = this._link;
+    cardImage.alt = this._link;
+    cardName.textContent = this._name;
     return this._element;
   }
 }
