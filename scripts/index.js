@@ -64,7 +64,7 @@ const addCardFormValidator = new FormValidator(config, addCardFormElement);
 addCardFormValidator.enableValidation();
 
 function handleAddButton() {
-  addCardFormValidator.resetForm();
+  addCardFormValidator.resetWholeForm();
   utils.openPopUp(popUpAddCard);
 }
 
@@ -76,7 +76,6 @@ function handleAddCardFormSubmit(evt) {
   };
   const card = new Card(newCard, "#card", utils.openPopUp);
   attachCard(card.generateCard());
-  addCardFormValidator.resetForm();
   utils.closePopUp(popUpAddCard);
 }
 
@@ -91,6 +90,7 @@ function handleProfileFormSubmit(evt) {
   utils.closePopUp(popUpProfile);
 }
 function openPopUpProfile() {
+  profileFormValidator.resetInputs();
   utils.openPopUp(popUpProfile);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;

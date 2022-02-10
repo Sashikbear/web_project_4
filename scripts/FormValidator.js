@@ -57,15 +57,22 @@ export default class FormValidator {
       });
     });
   }
-  resetForm() {
+  _resetForm() {
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
     this._inputList.forEach((inputElement) => {
       inputElement.value = "";
       this._hideInputError(inputElement);
-      this._toggleButtonState();
     });
+  }
+  resetWholeForm() {
+    this._resetForm();
+    this._toggleButtonState();
+  }
+  resetInputs() {
+    this._resetForm();
+    this._buttonElement.classList.remove(this._inactiveButtonClass);
   }
   enableValidation() {
     this._formElement.addEventListener("submit", (evt) => {
