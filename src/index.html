@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Around The U.S.</title>
   </head>
   <body class="page">
@@ -12,7 +11,7 @@
       <header class="header">
         <img
           class="header__logo"
-          src="./images/header-logo.svg"
+          src="<%=require('./images/header-logo.svg')%>"
           alt="Around the U.S. logo"
         />
       </header>
@@ -21,7 +20,7 @@
           <div class="profile__column">
             <img
               class="profile__image"
-              src="./images/profile-image.png"
+              src="<%=require('./images/profile-image.png')%>"
               alt="profile image"
             />
             <div class="profile__info">
@@ -165,6 +164,5 @@
         </div>
       </li>
     </template>
-    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
