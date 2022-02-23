@@ -1,11 +1,11 @@
 export default class Card {
-  constructor(card, cardSelector, openPopUp) {
-    this._name = card.name;
-    this._link = card.link;
+  constructor({ data, handleCardClick }, cardSelector) {
+    this._name = data.name;
+    this._link = data.link;
     this._cardSelector = cardSelector;
-    this._openPopUp = openPopUp;
+    this._handleCardClick = handleCardClick;
   }
-  // getter now returns an element
+
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -23,10 +23,11 @@ export default class Card {
       .addEventListener("click", this._handleLikeButton);
     this._element
       .querySelector(".card__image")
-      .addEventListener("click", this._handleCardImage);
+      .addEventListener("click", () =>
+        this._handleCardClick({ name: this._name, src: this._link })
+      );
   }
-  // using arrow functions in methods instead of when calling on the method inside an event listener
-  // removing the card correctly and setting element to null to remove the link to the DOM element
+
   _handleDeleteButton = () => {
     this._element.remove();
     this._element = null;
@@ -38,17 +39,6 @@ export default class Card {
       .classList.toggle("button_active");
   };
 
-  _handleCardImage = () => {
-    const popUpImageZoom = document.querySelector(".popup_type_zoom-card");
-    const imageZoom = document.querySelector(".popup__image");
-    const imageZoomTitle = document.querySelector(".popup__title");
-    this._openPopUp(popUpImageZoom);
-    imageZoom.src = this._element.querySelector(".card__image").src;
-    imageZoom.alt = this._element.querySelector(".card__title").textContent;
-    imageZoomTitle.textContent =
-      this._element.querySelector(".card__title").textContent;
-  };
-  // using the element created in getTemplate method
   generateCard() {
     this._element = this._getTemplate();
     this._setEventListeners();
