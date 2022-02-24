@@ -60,13 +60,10 @@ function handleEditButton() {
   jobInput.value = job;
   profileFormValidator.resetInputs();
 }
-function handleAddButton() {
-  addCardFormValidator.resetWholeForm();
-  addCardPopup.open();
-}
+
 editButton.addEventListener("click", handleEditButton);
 
-/* --- using new instance of Card class to create a ready-for-dusplay card -- */
+/* --- using new instance of Card class to create a ready-for-display card -- */
 
 function createCard({ data }) {
   const card = new Card(
@@ -98,11 +95,15 @@ cardList.renderItems();
 /* ------------------------ adding new card block ----------------------- */
 
 function handleAddCardFormSubmit() {
-  const inputValues = addCardPopup._getInputValues();
+  const { name, url } = addCardPopup._getInputValues();
   const data = {
-    name: inputValues.name,
-    link: inputValues.url,
+    name: name,
+    link: url,
   };
   cardList.addItem(createCard({ data }));
+}
+function handleAddButton() {
+  addCardFormValidator.resetWholeForm();
+  addCardPopup.open();
 }
 addButton.addEventListener("click", handleAddButton);
