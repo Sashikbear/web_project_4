@@ -4,8 +4,6 @@ import Card from "../scripts/components/Card.js";
 import {
   nameInput,
   jobInput,
-  profileFormElement,
-  addCardFormElement,
   editButton,
   addButton,
   initialCards,
@@ -18,11 +16,20 @@ import UserInfo from "../scripts/components/UserInfo.js";
 
 /* ---------------------------- form validations ---------------------------- */
 
-const addCardFormValidator = new FormValidator(config, addCardFormElement);
-addCardFormValidator.enableValidation();
+const formValidators = {};
 
-const profileFormValidator = new FormValidator(config, profileFormElement);
-profileFormValidator.enableValidation();
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(config, formElement);
+    const formName = formElement.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+    validator.resetValidation();
+  });
+};
+
+enableValidation(config);
 
 /* ------------- new classes' instances with necessary selectors ------------ */
 
@@ -51,6 +58,7 @@ imagePopup.setEventListeners();
 
 function handleProfileFormSubmit({ name: name, job: job }) {
   userInfo.setUserInfo({ name, job });
+  profilePopup.close();
 }
 
 function handleEditButton() {
@@ -58,52 +66,40 @@ function handleEditButton() {
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = job;
-  profileFormValidator.resetInputs();
 }
 
 editButton.addEventListener("click", handleEditButton);
-
-/* --- using new instance of Card class to create a ready-for-display card -- */
-
-function createCard({ data }) {
-  const card = new Card(
-    {
-      data,
-      handleCardClick: () => {
-        imagePopup.open({ link: data.link, name: data.name });
-      },
-    },
-    "#card"
-  );
-  const cardElement = card.generateCard();
-  return cardElement;
-}
 
 /* ------ using new instance of Section class to display initial cards ------ */
 
 const cardList = new Section(
   {
     items: initialCards,
-    renderer: (data) => {
-      cardList.addItem(createCard({ data }));
-    },
+    renderer: (data) =>
+      new Card(
+        {
+          data,
+          handleCardClick: () => {
+            imagePopup.open({ link: data.link, name: data.name });
+          },
+        },
+        "#card"
+      ).generateCard(),
   },
   ".cards__card-grid"
 );
+
 cardList.renderItems();
 
 /* ------------------------ adding new card block ----------------------- */
 
-function handleAddCardFormSubmit() {
-  const { name, url } = addCardPopup._getInputValues();
+function handleAddCardFormSubmit({ name, url }) {
   const data = {
     name: name,
     link: url,
   };
-  cardList.addItem(createCard({ data }));
+  cardList.addItem(data);
+  addCardPopup.close();
 }
-function handleAddButton() {
-  addCardFormValidator.resetWholeForm();
-  addCardPopup.open();
-}
-addButton.addEventListener("click", handleAddButton);
+
+addButton.addEventListener("click", () => addCardPopup.open());

@@ -1,18 +1,5 @@
 export const nameInput = document.querySelector(".popup__input_type_name");
 export const jobInput = document.querySelector(".popup__input_type_job");
-export const imageTitle = document.querySelector(
-  ".popup__input_type_image-title"
-);
-export const imageLink = document.querySelector(
-  ".popup__input_type_image-link"
-);
-export const allPopUps = document.querySelectorAll(".popup");
-export const profileFormElement = document.querySelector(
-  ".popup__form_type_profile"
-);
-export const addCardFormElement = document.querySelector(
-  ".popup__form_type_add-card"
-);
 export const editButton = document.querySelector(".button_type_edit");
 export const addButton = document.querySelector(".button_type_add");
 

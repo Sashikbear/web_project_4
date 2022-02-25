@@ -4,6 +4,11 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._element = this._getTemplate();
+    this._likeButton = this._element.querySelector(".button_type_like");
+    this._deleteButton = this._element.querySelector(".button_type_delete");
+    this._cardImage = this._element.querySelector(".card__image");
+    this._cardImageTitle = this._element.querySelector(".card__title");
   }
 
   _getTemplate() {
@@ -15,17 +20,11 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._element
-      .querySelector(".button_type_delete")
-      .addEventListener("click", this._handleDeleteButton);
-    this._element
-      .querySelector(".button_type_like")
-      .addEventListener("click", this._handleLikeButton);
-    this._element
-      .querySelector(".card__image")
-      .addEventListener("click", () =>
-        this._handleCardClick({ name: this._name, src: this._link })
-      );
+    this._deleteButton.addEventListener("click", this._handleDeleteButton);
+    this._likeButton.addEventListener("click", this._handleLikeButton);
+    this._cardImage.addEventListener("click", () =>
+      this._handleCardClick({ name: this._name, src: this._link })
+    );
   }
 
   _handleDeleteButton = () => {
@@ -34,19 +33,14 @@ export default class Card {
   };
 
   _handleLikeButton = () => {
-    this._element
-      .querySelector(".button_type_like")
-      .classList.toggle("button_active");
+    this._likeButton.classList.toggle("button_active");
   };
 
   generateCard() {
-    this._element = this._getTemplate();
     this._setEventListeners();
-    const cardImage = this._element.querySelector(".card__image");
-    const cardName = this._element.querySelector(".card__title");
-    cardImage.src = this._link;
-    cardImage.alt = this._link;
-    cardName.textContent = this._name;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._link;
+    this._cardImageTitle.textContent = this._name;
     return this._element;
   }
 }
