@@ -25,7 +25,6 @@ const enableValidation = (config) => {
     const formName = formElement.getAttribute("name");
     formValidators[formName] = validator;
     validator.enableValidation();
-    validator.resetValidation();
   });
 };
 
@@ -56,8 +55,8 @@ imagePopup.setEventListeners();
 
 /* ------------------------ editing the profile block ----------------------- */
 
-function handleProfileFormSubmit({ name: name, job: job }) {
-  userInfo.setUserInfo({ name, job });
+function handleProfileFormSubmit(userData) {
+  userInfo.setUserInfo(userData);
   profilePopup.close();
 }
 
@@ -66,6 +65,7 @@ function handleEditButton() {
   const { name, job } = userInfo.getUserInfo();
   nameInput.value = name;
   jobInput.value = job;
+  formValidators["form-profile"].resetValidation();
 }
 
 editButton.addEventListener("click", handleEditButton);
@@ -101,5 +101,8 @@ function handleAddCardFormSubmit({ name, url }) {
   cardList.addItem(data);
   addCardPopup.close();
 }
-
-addButton.addEventListener("click", () => addCardPopup.open());
+function handleAddButton() {
+  addCardPopup.open();
+  formValidators["form-add-card"].resetValidation();
+}
+addButton.addEventListener("click", handleAddButton);
