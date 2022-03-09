@@ -6,14 +6,15 @@ import {
   jobInput,
   editButton,
   addButton,
-  initialCards,
+  avatar,
   config,
 } from "../scripts/utils/constants.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithDelete from "../scripts/components/PopupWithDelete.js";
 import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
-
+import Api from "../scripts/components/Api.js";
 /* ---------------------------- form validations ---------------------------- */
 
 const formValidators = {};
@@ -34,7 +35,8 @@ enableValidation(config);
 
 const userInfo = new UserInfo({
   userNameSelector: ".profile__user-name",
-  userJobSelector: ".profile__user-job",
+  userAboutSelector: ".profile__user-job",
+  avatarSelector: ".profile__image",
 });
 
 const profilePopup = new PopupWithForm(
@@ -45,26 +47,34 @@ const addCardPopup = new PopupWithForm(
   ".popup_type_add-card",
   handleAddCardFormSubmit
 );
+const avatarPopup = new PopupWithForm(".popup_type_avatar", handleAvatarSubmit);
 const imagePopup = new PopupWithImage(".popup_type_zoom-card");
+const deletePopup = new PopupWithDelete(".popup_type_delete");
 
 /* -- enable inherited eventlisteners on instances from parent Popup class -- */
 
 profilePopup.setEventListeners();
 addCardPopup.setEventListeners();
 imagePopup.setEventListeners();
+deletePopup.setEventListeners();
+avatarPopup.setEventListeners();
 
 /* ------------------------ editing the profile block ----------------------- */
 
 function handleProfileFormSubmit(userData) {
-  userInfo.setUserInfo(userData);
+  api.editProfile(userData).then((res) => {
+    console.log(res);
+    userInfo.setUserInfo(res);
+  });
+
   profilePopup.close();
 }
 
 function handleEditButton() {
   profilePopup.open();
-  const { name, job } = userInfo.getUserInfo();
+  const { name, about } = userInfo.getUserInfo();
   nameInput.value = name;
-  jobInput.value = job;
+  jobInput.value = about;
   formValidators["form-profile"].resetValidation();
 }
 
@@ -74,22 +84,46 @@ editButton.addEventListener("click", handleEditButton);
 
 const cardList = new Section(
   {
-    items: initialCards,
-    renderer: (data) =>
-      new Card(
+    renderer: (data) => {
+      const card = new Card(
         {
           data,
           handleCardClick: () => {
             imagePopup.open({ link: data.link, name: data.name });
           },
+          handleDeleteCard: (id) => {
+            deletePopup.open();
+            deletePopup.setAction(() => {
+              api.deleteCard(id).then((res) => {
+                console.log(res);
+                card.removeCardFromDOM();
+                deletePopup.close();
+              });
+            });
+          },
+          handleLikeButton: (id) => {
+            const isAlreadyliked = card.isLiked();
+            if (isAlreadyliked) {
+              api.unlikeCard(id).then((res) => {
+                console.log(res);
+                card.handleLikeCard(res.likes);
+              });
+            } else {
+              api.likeCard(id).then((res) => {
+                console.log(res);
+                card.handleLikeCard(res.likes);
+              });
+            }
+          },
         },
-        "#card"
-      ).generateCard(),
+        "#card",
+        userId
+      );
+      return card.generateCard();
+    },
   },
   ".cards__card-grid"
 );
-
-cardList.renderItems();
 
 /* ------------------------ adding new card block ----------------------- */
 
@@ -98,7 +132,11 @@ function handleAddCardFormSubmit({ name, url }) {
     name: name,
     link: url,
   };
-  cardList.addItem(data);
+  api.createCard(data).then((res) => {
+    console.log(res);
+    cardList.addItem(res);
+  });
+
   addCardPopup.close();
 }
 function handleAddButton() {
@@ -106,3 +144,44 @@ function handleAddButton() {
   formValidators["form-add-card"].resetValidation();
 }
 addButton.addEventListener("click", handleAddButton);
+
+/* ------------------------ invoking Api instance woth valid token ----------------------- */
+
+const api = new Api({
+  baseUrl: "https://around.nomoreparties.co/v1/group-12",
+  headers: {
+    authorization: "0d380c06-5bf9-4f9e-b38f-f8e4b1728003",
+    "Content-Type": "application/json",
+  },
+});
+
+/* ------------------------ populating page with  initial data ----------------------- */
+let userId;
+Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
+  ([userData, cardData]) => {
+    console.log(cardData);
+    userId = userData._id;
+    userInfo.setUserInfo({
+      name: userData.name,
+      about: userData.about,
+      avatar: userData.avatar,
+      _id: userData._id,
+    });
+    cardList.renderItems(cardData.reverse());
+  }
+);
+
+/* ------------------------ updating avatar ----------------------- */
+
+function handleAvatarClick() {
+  avatarPopup.open();
+  formValidators["form-avatar"].resetValidation();
+}
+avatar.addEventListener("click", handleAvatarClick);
+function handleAvatarSubmit(userData) {
+  api.editAvatar(userData).then((res) => {
+    console.log(res);
+    userInfo.setUserInfo(res);
+    avatarPopup.close();
+  });
+}

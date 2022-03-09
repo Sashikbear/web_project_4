@@ -18,14 +18,14 @@
       <main class="main">
         <section class="profile">
           <div class="profile__column">
-            <img
-              class="profile__image"
-              src="<%=require('./images/profile-image.png')%>"
-              alt="profile image"
-            />
+            <div class="profile__image-area">
+              <img class="profile__image" src="" alt="profile image" />
+              <div class="profile__image-overlay"></div>
+            </div>
+
             <div class="profile__info">
               <div class="profile__user">
-                <h1 class="profile__user-name">Jacques Cousteau</h1>
+                <h1 class="profile__user-name"></h1>
 
                 <button
                   class="button button_type_edit"
@@ -33,7 +33,7 @@
                   aria-label="edit"
                 ></button>
               </div>
-              <p class="profile__user-job">Explorer</p>
+              <p class="profile__user-job"></p>
             </div>
           </div>
 
@@ -73,7 +73,7 @@
               <span class="popup__error name-input-error"></span>
               <input
                 id="job-input"
-                name="job"
+                name="about"
                 class="popup__input popup__input_type_job"
                 type="text"
                 placeholder="About me"
@@ -138,6 +138,53 @@
             <p class="popup__title"></p>
           </div>
         </section>
+        <section class="popup popup_type_delete">
+          <div class="popup__container">
+            <button
+              class="button button_type_close"
+              type="button"
+              aria-label="close"
+            ></button>
+            <form
+              name="form-delete"
+              class="popup__form popup__form_type_delete"
+              action="#"
+              method="get"
+              novalidate
+            >
+              <h2 class="popup__form-title">Are you sure?</h2>
+              <button type="submit" class="popup__button">Yes</button>
+            </form>
+          </div>
+        </section>
+        <section class="popup popup_type_avatar">
+          <div class="popup__container">
+            <button
+              class="button button_type_close"
+              type="button"
+              aria-label="close"
+            ></button>
+            <form
+              name="form-avatar"
+              class="popup__form popup__form_type_avatar"
+              action="#"
+              method="get"
+              novalidate
+            >
+              <h2 class="popup__form-title">Change profile picture</h2>
+              <input
+                id="url-input"
+                type="url"
+                name="avatar"
+                class="popup__input popup__input_type_image-link"
+                placeholder="Image Link"
+                required
+              />
+              <span class="popup__error url-input-error"></span>
+              <button type="submit" class="popup__button">Save</button>
+            </form>
+          </div>
+        </section>
         <section class="cards">
           <ul class="cards__card-grid"></ul>
         </section>
@@ -156,11 +203,14 @@
         ></button>
         <div class="card__info">
           <h2 class="card__title"></h2>
-          <button
-            class="button button_type_like"
-            type="button"
-            aria-label="like"
-          ></button>
+          <div class="card__likes">
+            <button
+              class="button button_type_like"
+              type="button"
+              aria-label="like"
+            ></button>
+            <span class="card__like-counter"></span>
+          </div>
         </div>
       </li>
     </template>
