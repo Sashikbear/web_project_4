@@ -62,12 +62,16 @@ avatarPopup.setEventListeners();
 /* ------------------------ editing the profile block ----------------------- */
 
 function handleProfileFormSubmit(userData) {
-  api.editProfile(userData).then((res) => {
-    console.log(res);
-    userInfo.setUserInfo(res);
-  });
-
-  profilePopup.close();
+  profilePopup.processing();
+  api
+    .editProfile(userData)
+    .then((res) => {
+      console.log(res);
+      userInfo.setUserInfo(res);
+    })
+    .finally(() => {
+      profilePopup.close();
+    });
 }
 
 function handleEditButton() {
@@ -93,12 +97,18 @@ const cardList = new Section(
           },
           handleDeleteCard: (id) => {
             deletePopup.open();
+
             deletePopup.setAction(() => {
-              api.deleteCard(id).then((res) => {
-                console.log(res);
-                card.removeCardFromDOM();
-                deletePopup.close();
-              });
+              deletePopup.processing();
+              api
+                .deleteCard(id)
+                .then((res) => {
+                  console.log(res);
+                  card.removeCardFromDOM();
+                })
+                .finally(() => {
+                  deletePopup.close();
+                });
             });
           },
           handleLikeButton: (id) => {
@@ -128,16 +138,20 @@ const cardList = new Section(
 /* ------------------------ adding new card block ----------------------- */
 
 function handleAddCardFormSubmit({ name, url }) {
+  addCardPopup.processing();
   const data = {
     name: name,
     link: url,
   };
-  api.createCard(data).then((res) => {
-    console.log(res);
-    cardList.addItem(res);
-  });
-
-  addCardPopup.close();
+  api
+    .createCard(data)
+    .then((res) => {
+      console.log(res);
+      cardList.addItem(res);
+    })
+    .finally(() => {
+      addCardPopup.close();
+    });
 }
 function handleAddButton() {
   addCardPopup.open();
@@ -165,7 +179,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
       name: userData.name,
       about: userData.about,
       avatar: userData.avatar,
-      _id: userData._id,
     });
     cardList.renderItems(cardData.reverse());
   }
@@ -179,9 +192,14 @@ function handleAvatarClick() {
 }
 avatar.addEventListener("click", handleAvatarClick);
 function handleAvatarSubmit(userData) {
-  api.editAvatar(userData).then((res) => {
-    console.log(res);
-    userInfo.setUserInfo(res);
-    avatarPopup.close();
-  });
+  avatarPopup.processing();
+  api
+    .editAvatar(userData)
+    .then((res) => {
+      console.log(res);
+      userInfo.setUserInfo(res);
+    })
+    .finally(() => {
+      avatarPopup.close();
+    });
 }

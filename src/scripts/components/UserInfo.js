@@ -3,7 +3,6 @@ export default class UserInfo {
     name,
     about,
     avatar,
-    _id,
     userNameSelector,
     userAboutSelector,
     avatarSelector,
@@ -11,7 +10,6 @@ export default class UserInfo {
     (this._name = name),
       (this._about = about),
       (this._avatar = avatar),
-      (this._id = _id),
       (this._userNameElement = document.querySelector(userNameSelector)),
       (this._userAboutElement = document.querySelector(userAboutSelector)),
       (this._avatarElement = document.querySelector(avatarSelector));

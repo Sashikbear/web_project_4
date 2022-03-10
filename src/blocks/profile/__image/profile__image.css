@@ -3,9 +3,3 @@
   height: 100%;
   border-radius: 50%;
 }
-@media screen and (max-width: 1150px) {
-  .profile__image {
-    margin: 0;
-  }
-}
-/* centered all content in profile section on 320 viewport */
