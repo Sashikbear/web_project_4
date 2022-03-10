@@ -1,5 +1,5 @@
 import Popup from "./Popup.js";
-class PopupWithDelete extends Popup {
+class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._button = this._popupElement.querySelector(".popup__button");
@@ -23,4 +23,4 @@ class PopupWithDelete extends Popup {
     super.open();
   }
 }
-export default PopupWithDelete;
+export default PopupWithConfirmation;

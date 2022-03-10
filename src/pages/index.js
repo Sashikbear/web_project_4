@@ -11,10 +11,11 @@ import {
 } from "../scripts/utils/constants.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
-import PopupWithDelete from "../scripts/components/PopupWithDelete.js";
+import PopupWithConfirmation from "../scripts/components/PopupWithConfirmation.js";
 import Section from "../scripts/components/Section.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
+
 /* ---------------------------- form validations ---------------------------- */
 
 const formValidators = {};
@@ -49,7 +50,7 @@ const addCardPopup = new PopupWithForm(
 );
 const avatarPopup = new PopupWithForm(".popup_type_avatar", handleAvatarSubmit);
 const imagePopup = new PopupWithImage(".popup_type_zoom-card");
-const deletePopup = new PopupWithDelete(".popup_type_delete");
+const deletePopup = new PopupWithConfirmation(".popup_type_delete");
 
 /* -- enable inherited eventlisteners on instances from parent Popup class -- */
 
