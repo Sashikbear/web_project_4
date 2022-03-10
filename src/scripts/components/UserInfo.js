@@ -25,7 +25,8 @@ export default class UserInfo {
   setUserInfo({ name, about, avatar }) {
     this._userNameElement.textContent = name || this._name;
     this._userAboutElement.textContent = about || this._about;
-    this._avatarElement.src = avatar || this._avatar;
-    this._avatarElement.alt = name || this._name;
+    this._avatarElement.style.backgroundImage =
+      `url(${avatar})` || `url(${this._avatar})`;
+    // this._avatarElement.alt = name || this._name;
   }
 }
