@@ -66,7 +66,6 @@ function handleProfileFormSubmit(userData) {
   api
     .editProfile(userData)
     .then((res) => {
-      console.log(res);
       userInfo.setUserInfo(res);
     })
     .finally(() => {
@@ -100,27 +99,20 @@ const cardList = new Section(
 
             deletePopup.setAction(() => {
               deletePopup.processing();
-              api
-                .deleteCard(id)
-                .then((res) => {
-                  console.log(res);
-                  card.removeCardFromDOM();
-                })
-                .finally(() => {
-                  deletePopup.close();
-                });
+              api.deleteCard(id).finally(() => {
+                card.removeCardFromDOM();
+                deletePopup.close();
+              });
             });
           },
           handleLikeButton: (id) => {
             const isAlreadyliked = card.isLiked();
             if (isAlreadyliked) {
               api.unlikeCard(id).then((res) => {
-                console.log(res);
                 card.handleLikeCard(res.likes);
               });
             } else {
               api.likeCard(id).then((res) => {
-                console.log(res);
                 card.handleLikeCard(res.likes);
               });
             }
@@ -146,7 +138,6 @@ function handleAddCardFormSubmit({ name, url }) {
   api
     .createCard(data)
     .then((res) => {
-      console.log(res);
       cardList.addItem(res);
     })
     .finally(() => {
@@ -159,7 +150,7 @@ function handleAddButton() {
 }
 addButton.addEventListener("click", handleAddButton);
 
-/* ------------------------ invoking Api instance woth valid token ----------------------- */
+/* ------------------------ invoking Api instance with valid token ----------------------- */
 
 const api = new Api({
   baseUrl: "https://around.nomoreparties.co/v1/group-12",
@@ -170,10 +161,10 @@ const api = new Api({
 });
 
 /* ------------------------ populating page with  initial data ----------------------- */
+
 let userId;
 Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   ([userData, cardData]) => {
-    console.log(cardData);
     userId = userData._id;
     userInfo.setUserInfo({
       name: userData.name,
@@ -184,7 +175,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()]).then(
   }
 );
 
-/* ------------------------ updating avatar ----------------------- */
+/* ------------------------ updating avatar block ----------------------- */
 
 function handleAvatarClick() {
   avatarPopup.open();
@@ -196,7 +187,6 @@ function handleAvatarSubmit(userData) {
   api
     .editAvatar(userData)
     .then((res) => {
-      console.log(res);
       userInfo.setUserInfo(res);
     })
     .finally(() => {
