@@ -4,13 +4,9 @@ export default class Api {
     this._headers = headers;
   }
   _customFetch = (url, headers) => {
-    return fetch(url, headers)
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      )
-      .catch((err) => {
-        console.log(`Error: ${err}`);
-      });
+    return fetch(url, headers).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   };
   getUserInfo() {
     return this._customFetch(`${this._baseUrl}/users/me`, {

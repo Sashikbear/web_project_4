@@ -1,26 +1,24 @@
 import Popup from "./Popup.js";
+
 class PopupWithConfirmation extends Popup {
   constructor(popupSelector) {
     super(popupSelector);
     this._button = this._popupElement.querySelector(".popup__button");
   }
   setAction(action) {
-    this._submitHandler = action;
+    this._handleSubmit = action;
   }
   setEventListeners() {
-    super.setEventListeners();
     this._popupElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      this._submitHandler();
+      this._handleSubmit();
     });
   }
-  processing() {
+  showLoading() {
     this._button.textContent = "Deleting...";
   }
-  open() {
+  hideLoading() {
     this._button.textContent = "Yes";
-
-    super.open();
   }
 }
 export default PopupWithConfirmation;

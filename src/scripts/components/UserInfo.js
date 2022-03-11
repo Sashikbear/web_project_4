@@ -21,11 +21,13 @@ export default class UserInfo {
       about: this._userAboutElement.textContent,
     };
   }
-
-  setUserInfo({ name, about, avatar }) {
+  setAvatar({ avatar }) {
+    this._avatarElement.style.backgroundImage = avatar
+      ? `url(${avatar})`
+      : `url(${this._avatar})`;
+  }
+  setUserInfo({ name, about }) {
     this._userNameElement.textContent = name || this._name;
     this._userAboutElement.textContent = about || this._about;
-    this._avatarElement.style.backgroundImage =
-      `url(${avatar})` || `url(${this._avatar})`;
   }
 }
